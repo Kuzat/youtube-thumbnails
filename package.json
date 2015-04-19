@@ -1,6 +1,6 @@
 {
   "name": "youtube-thumbnails",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate Urls for all thumbnails to Youtube Video",
   "main": "index.js",
   "repository": {
