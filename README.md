@@ -46,7 +46,7 @@ The quality on the youtube picture.
 #### callback(error, thumbnail)
 return an error if there was an error else it return a thumbnail link.
 
-####Example
+#### Example
 ```javascript
 youthumb.get('la9C0n7jSsI', 'maxres', function(err, thumbnail) {
     if (err)
@@ -61,7 +61,7 @@ youthumb.get('la9C0n7jSsI', 'maxres', function(err, thumbnail) {
 https://i.ytimg.com/vi/la9C0n7jSsI/maxresdefault.jpg
 ```
 ### Version
-1.0.0
+1.0.2
 License
 ----
 
