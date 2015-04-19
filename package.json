@@ -1,11 +1,11 @@
 {
-  "name": "youtube-thumbnail",
-  "version": "0.1.0",
+  "name": "youtube-thumbnails",
+  "version": "1.0.0",
   "description": "Generate Urls for all thumbnails to Youtube Video",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kuzat/youtube-thumbnail.git"
+    "url": "https://github.com/Kuzat/youtube-thumbnails.git"
   },
   "keywords": [
     "Youtube",
@@ -17,6 +17,6 @@
   "author": "Vegard Bjørsvik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Kuzat/youtube-thumbnail/issues"
+    "url": "https://github.com/Kuzat/youtube-thumbnails/issues"
   }
 }

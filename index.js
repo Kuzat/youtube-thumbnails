@@ -1,4 +1,4 @@
-var http = require('https');
+var https = require('https');
 
 var config = {
 	base: "https://i.ytimg.com/vi/",
@@ -11,21 +11,59 @@ var config = {
 	}
 };
 
+function valid(id, callback) {
+	https.get(config.base + id +'/'+ config.quality.maxres + ".jpg", function(response) {
+		if (response.statusCode == 200)
+			callback({maxres: true, standard: true});
+		else {
+			https.get(config.base + id +'/'+ config.quality.standard + ".jpg", function(response) {
+				if (response.statusCode == 200)
+					callback({maxres: false, standard: true});
+				else
+					callback({maxres: false, standard: false});
+			});
+		}
+	});
+} 
 
-var all = function(id) {
+var all = function(id, callback) {
 
-	var allYouthumbs = {}
+	var allYouthumbs = {};
 
-	for (quality in config.quality) {
-		allYouthumbs[quality] = config.base + id +'/'+ config.quality[quality] + ".jpg"
-	}
+	valid(id, function(exist) {
+		if (exist.maxres) {
 
-	return allYouthumbs
+			for (quality in config.quality) {
+				allYouthumbs[quality] = config.base + id +'/'+ config.quality[quality] + ".jpg";
+			}
+
+		}
+		else if (exist.standard) {
+
+			for (quality in config.quality) {
+				if (quality == 'maxres')
+					continue
+				allYouthumbs[quality] = config.base + id +'/'+ config.quality[quality] + ".jpg";
+			}
+
+		}
+		else {
+
+			for (quality in config.quality) {
+				if (quality == 'maxres' || quality =='standard')
+					continue
+				allYouthumbs[quality] = config.base + id +'/'+ config.quality[quality] + ".jpg";
+			}
+
+		}
+
+		callback(allYouthumbs);
+	});
 }
 
-var get = function(id, quality) {
+var get = function(id, quality, callback) {
 
-	var imageQuality
+	var imageQuality;
 
 	if (quality in config.quality) {
 		imageQuality = config.quality[quality];
@@ -35,7 +73,26 @@ var get = function(id, quality) {
 		imageQuality = config.quality.default;
 	}
 
-	return config.base + id +'/'+ imageQuality + ".jpg"
+	if (imageQuality == 'maxresdefault' || imageQuality == 'sddefault') {
+		valid(id, function(exist) {
+
+			if (imageQuality == 'maxresdefault' && exist.maxres) {
+				callback(null, config.base + id +'/'+ imageQuality + ".jpg");
+			}
+
+			else if (imageQuality == 'sddefault' && exist.standard) {
+				callback(null, config.base + id +'/'+ imageQuality + ".jpg");
+			}
+
+			else {
+				callback('Error: The thumbnail you where looking for don\'t  exist.');
+			}
+		});
+	}
+
+	else {
+		callback(null, config.base + id +'/'+ imageQuality + ".jpg");
+	}
 }
 
 module.exports.all = all;
