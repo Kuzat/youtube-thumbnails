@@ -1,4 +1,4 @@
-# youtube-thumbnails
+# youtube-thumbnails [![npm](https://img.shields.io/npm/dt/youtube-thumbnails.svg?style=flat-square)](https://www.npmjs.com/package/youtube-thumbnails)
 Get a youtube thumbnails
 ## Instalation
 ```sh
