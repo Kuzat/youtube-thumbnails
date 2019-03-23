@@ -11,12 +11,12 @@ var config = {
 	}
 };
 
-function valid(id, callback) {
-	https.get(config.base + id +'/'+ config.quality.maxres + ".jpg", function(response) {
+function valid(id, proxy, callback) {
+	https.get(proxy + config.base + id +'/'+ config.quality.maxres + ".jpg", function(response) {
 		if (response.statusCode == 200)
 			callback({maxres: true, standard: true});
 		else {
-			https.get(config.base + id +'/'+ config.quality.standard + ".jpg", function(response) {
+			https.get(proxy + config.base + id +'/'+ config.quality.standard + ".jpg", function(response) {
 				if (response.statusCode == 200)
 					callback({maxres: false, standard: true});
 				else
@@ -26,11 +26,11 @@ function valid(id, callback) {
 	});
 } 
 
-var all = function(id, callback) {
+var all = function(id, proxy = '', callback) {
 
 	var allYouthumbs = {};
 
-	valid(id, function(exist) {
+	valid(id, proxy, function(exist) {
 		if (exist.maxres) {
 
 			for (quality in config.quality) {
@@ -61,7 +61,7 @@ var all = function(id, callback) {
 	});
 }
 
-var get = function(id, quality, callback) {
+var get = function(id, proxy = '', quality, callback) {
 
 	var imageQuality;
 
@@ -74,7 +74,7 @@ var get = function(id, quality, callback) {
 	}
 
 	if (imageQuality == 'maxresdefault' || imageQuality == 'sddefault') {
-		valid(id, function(exist) {
+		valid(id, proxy, function(exist) {
 
 			if (imageQuality == 'maxresdefault' && exist.maxres) {
 				callback(null, config.base + id +'/'+ imageQuality + ".jpg");
