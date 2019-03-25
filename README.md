@@ -8,7 +8,7 @@ $ npm install youtube-thumbnails
 ---
 call the module
 ```javascript
-var youthumb = require('youtube-thumbnails');
+const youthumb = require('youtube-thumbnails');
 ```
 ### youthumb.all(id, callback)
 Get all the available youtube thumbnails for a given id.
@@ -20,9 +20,9 @@ The id from the youtube video you want a thumbnail from.
 return an object, thumbnails, with all the links.
 #### Example
 ```javascript
-youthumb.all('dlte2Mfg614', function(thumbnails) {
-    console.log(youthumbs);
-}
+youthumb.all('dlte2Mfg614', (thumbnails) => {
+    console.log(thumbnails);
+});
 ```
 ##### Result:
 ```
@@ -48,7 +48,7 @@ return an error if there was an error else it return a thumbnail link.
 
 #### Example
 ```javascript
-youthumb.get('la9C0n7jSsI', 'maxres', function(err, thumbnail) {
+youthumb.get('la9C0n7jSsI', 'maxres', (err, thumbnail) => {
     if (err)
         console.log(err);
     else {
@@ -61,7 +61,7 @@ youthumb.get('la9C0n7jSsI', 'maxres', function(err, thumbnail) {
 https://i.ytimg.com/vi/la9C0n7jSsI/maxresdefault.jpg
 ```
 ### Version
-1.0.2
+1.1.0
 License
 ----
 
