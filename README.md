@@ -61,7 +61,7 @@ youthumb.get('la9C0n7jSsI', 'maxres', (err, thumbnail) => {
 https://i.ytimg.com/vi/la9C0n7jSsI/maxresdefault.jpg
 ```
 ### Version
-1.1.2
+1.1.0
 License
 ----
 
